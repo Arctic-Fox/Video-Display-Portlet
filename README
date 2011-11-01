@@ -4,6 +4,8 @@ Designed for Liferay Version 6
 
 This portlet will play .swf videos stored in the Liferay Document Library.  The files and enclosing folders must have view permissions for the intended users.
 
+Use Portlet Preferences to set the server name and the location of the desired folder in the Document Library.
+
 To install:
 
 First, build this project:
