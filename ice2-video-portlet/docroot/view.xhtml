@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns:aui="http://portletfaces.org/alloyfaces/aui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:chat="http://java.sun.com/jsf/composite/chat"
+	xmlns:liferay-ui="http://portletfaces.org/liferayfaces/liferay-ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head />
+	<h:body>
+		<link href="#{request.contextPath}/css/rime-portlet.css" rel="stylesheet" type="text/css" />
+		<link href="#{request.contextPath}/css/override.css" rel="stylesheet" type="text/css" />
+		<aui:form id="f">
+			<aui:layout>
+			<ice:panelGrid columns="1">
+			
+				<ice:panelGrid columns="3" rendered="#{videoDisplay.control}">
+					<ice:commandLink actionListener="#{videoDisplay.back}" id="back">
+						<h:graphicImage style="height:30px; width:30px;" value="#{resource['liferay-images:02_left.png']}" />
+					</ice:commandLink>
+					<ice:outputText style="width:300px;" value="#{videoDisplay.filename}"/>
+					<ice:commandLink actionListener="#{videoDisplay.forward}" id="forward">
+						<h:graphicImage style="height:30px; width:30px;" value="#{resource['liferay-images:02_right.png']}" />
+					</ice:commandLink>
+				</ice:panelGrid>
+					
+				<ice:panelGrid columns="1" rendered="#{!videoDisplay.control}">
+					<h:outputText value="Select Video to View:"/>
+						<ice:selectOneMenu id="selectDefault"
+								value="#{videoDisplay.selectedVideo}"
+								valueChangeListener="#{videoDisplay.changedVideoEvent}"
+								style="width: 100%;" partialSubmit="true">
+								<f:selectItems id="selectVideosList" value="#{videoList.videos}" />
+						</ice:selectOneMenu>
+				</ice:panelGrid>
+			
+				<ice:panelGrid columns="1" style="width: #{videoDisplay.width}px;">
+					<ice:outputMedia id="outputMedia"
+								player="flash" resizable="true" source="#{videoDisplay.source}"
+								standbyText="Video Loading..."
+								style="width: #{videoDisplay.width}px; height: #{videoDisplay.height}px;">
+								<f:param name="play" value="true" />
+					</ice:outputMedia>
+					<ice:outputText id="noVideo" rendered="#{videoDisplay.noVideo}" value="No video selected." />
+				</ice:panelGrid>
+
+
+				</ice:panelGrid>
+			</aui:layout>
+		</aui:form>
+	</h:body>
+</f:view>

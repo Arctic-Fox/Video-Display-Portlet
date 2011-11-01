@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:view xmlns:aui="http://portletfaces.org/alloyfaces/aui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ice="http://www.icesoft.com/icefaces/component"
+	xmlns:chat="http://java.sun.com/jsf/composite/chat"
+	xmlns:liferay-ui="http://portletfaces.org/liferayfaces/liferay-ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:head />
+	<h:body>
+		<aui:form id="f">
+			<aui:layout>
+				<ice:panelGrid columns="2">
+					<h:outputText value="Select Source Folder:"/>
+					<ice:selectOneMenu id="selectFolder"
+								style="width: 120px;" value="#{preferencesBacking.selectedFolder}"
+								valueChangeListener="#{preferencesBacking.folderChangedEvent}"
+								partialSubmit="true">
+								<f:selectItems id="selectFoldersList" value="#{folderList.folders}" />
+					</ice:selectOneMenu>
+					<h:outputText value="Select Default Video:"/>
+					<ice:selectOneMenu id="selectDefault" immediate="true"
+								value="#{preferencesBacking.selectedVideo}" partialSubmit="true"
+								valueChangeListener="#{preferencesBacking.changedVideoEvent}"
+								style="width: 120px;">
+								<f:selectItems id="selectVideosList" value="#{videoList.videos}" />
+					</ice:selectOneMenu>
+					<h:outputText value="Enter hostname:"/>
+					<ice:inputText id="enterHost"
+								value="#{preferencesBacking.hostname}"
+								valueChangeListener="#{preferencesBacking.hostnameChanged}"
+								partialSubmit="true" />
+					<h:outputText value="Video Selection Control:"/>
+					<ice:selectOneRadio id="slctControl" layout="pageDirection" value="#{preferencesBacking.selectedControlType}">
+                        <f:selectItems id="slctControls" value="#{preferencesBacking.controls}"/>
+                    </ice:selectOneRadio>
+                    <h:outputText value="Full Screen Display:"/>
+                    <ice:selectBooleanCheckbox id="fullscreen" value="#{preferencesBacking.fullscreen}"/>
+                    <ice:commandButton actionListener="#{preferencesBacking.apply}" id="applyButton" value="Save" />
+					<ice:outputText id="saved" value="#{preferencesBacking.saved}" partialSubmit="true" />
+				</ice:panelGrid>
+			</aui:layout>
+		</aui:form>
+
+	</h:body>
+</f:view>
