@@ -24,7 +24,7 @@ dl.file.max.size=60072000
 These settings are also available in the Control Panel under Server Administration -->  File Uploads.
 
 /*
- Copyright 2011 Johns Hopkins University
+ Copyright 2011 Johns Hopkins University Institute for Computational Medicine
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
