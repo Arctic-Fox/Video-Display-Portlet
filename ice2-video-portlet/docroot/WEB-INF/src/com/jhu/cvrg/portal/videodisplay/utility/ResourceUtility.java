@@ -42,9 +42,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 
 public class ResourceUtility {
 
-	private final static LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
-	private final static PortletPreferences prefs = liferayFacesContext.getPortletPreferences();
-	
 	public static DLFileEntry getVideo(long videoId){
 		DLFileEntry video = null;
 
@@ -52,6 +49,7 @@ public class ResourceUtility {
 			video = com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil
 			.getFileEntry(Long.valueOf(videoId));
 		} catch (NoSuchFileEntryException e){
+			if(videoId != 99999)// Temporary
 				printErrorMessage("ResourceUtility:Requested video file does not exist.");
 		} catch (PortalException e) {
 			printErrorMessage("Resource Utility");
@@ -65,26 +63,38 @@ public class ResourceUtility {
 	}
 	
 	public static String getControlType(){
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		PortletPreferences prefs = liferayFacesContext.getPortletPreferences();
 		return prefs.getValue("control", "1");
 	}
 	
 	public static String getStoredVideo(){
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		PortletPreferences prefs = liferayFacesContext.getPortletPreferences();
 		return prefs.getValue("default", "0");
 	}
 	
 	public static String getStoredFolder(){
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		PortletPreferences prefs = liferayFacesContext.getPortletPreferences();
 		return prefs.getValue("folder", "0");
 	}
 	
 	public static String getStoredHostname(){
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		PortletPreferences prefs = liferayFacesContext.getPortletPreferences();
 		return prefs.getValue("hostname", "localhost:8080");
 	}
 	
 	public static boolean getFullScreen(){
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		PortletPreferences prefs = liferayFacesContext.getPortletPreferences();
 		return prefs.getValue("fullscreen", "false").equals("true");
 	}
 	
 	public static void savePreferences(String folder, String video, String hostname, String controlType, boolean fullscreen){
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
+		PortletPreferences prefs = liferayFacesContext.getPortletPreferences();
 		try {
 			prefs.setValue("control", controlType);
 			prefs.setValue("folder", folder);
@@ -110,6 +120,7 @@ public class ResourceUtility {
 	}
 	
 	public static long getIdParameter(String param){
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		return LongHelper.toLong(liferayFacesContext.getExternalContext().getRequestParameterMap().get(param), 0L);
 	}
 	
@@ -129,7 +140,7 @@ public class ResourceUtility {
 	}
 	
 	public static long getCurrentGroupId(){
-		
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		PortletRequest request = (PortletRequest) liferayFacesContext.getExternalContext().getRequest();	
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
 		
@@ -137,7 +148,7 @@ public class ResourceUtility {
 	}
 	
 	public static User getCurrentUser(){
-		
+		LiferayFacesContext liferayFacesContext = LiferayFacesContext.getInstance();
 		User currentUser = null;
 		try {
 			currentUser = UserLocalServiceUtil.getUser(Long.parseLong(liferayFacesContext.getPortletRequest().getRemoteUser()));

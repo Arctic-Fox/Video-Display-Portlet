@@ -155,6 +155,9 @@ public class VideoDisplay extends GenericPortlet {
 	}
 
 	public String getSource() {
+		if(selectedVideo.equals("99999")){//Temporary
+			return "http://www.youtube.com/v/ARhBaMKDGR0";
+		}
 		if (!selectedVideo.equals("0") && !selectedVideo.equals("")) {
 			setVideoURL(selectedVideo);
 			source = "http://" + hostname + "/documents/" + groupId + "/"
