@@ -56,9 +56,6 @@ public class VideoList {
 				videos.add(item);
 			}
 			
-			//**Temporary YouTube Video added to list
-			videos.add(new SelectItem(99999, "CVRG_Registry_Demo.swf"));
-			
 			sortAlphabetically(videos);
 			
 		} catch (com.liferay.portal.kernel.exception.SystemException e) {
